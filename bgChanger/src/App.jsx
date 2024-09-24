@@ -5,6 +5,9 @@ function App() {
 
     const [color, setColor] = useState("black")
     // document.body.style.backgroundColor = "olive"
+    const change = () => {
+      setColor("Gray")
+    }
 
   return (
     <>
@@ -51,6 +54,11 @@ function App() {
             className="outline-none px-4 py-2 rounded-full"
             style={{backgroundColor:"olive"}}
             >Olive</button>
+            <button
+            onClick={change}
+            className="outline-none px-4 py-2 rounded-full bg-gray-400"
+            // style={{backgroundColor:"Gray"}}
+            >Gray</button>
           </div>
         </div>
       </div>
