@@ -59,6 +59,28 @@ function App() {
             />
               <label>Length: {length}</label>
           </div>
+          <div className='flex items-center gap-x-1'>
+              <input 
+              type="checkbox"
+              defaultChecked={numberAllowed}
+              id="numberInput"
+              onChange={(e) => {
+                setNumberAllowed((prev) => !prev)
+              }} 
+              />
+              <label>Number</label>
+          </div>
+          <div className='flex items-center gap-x-1'>
+              <input 
+              type="checkbox"
+              defaultChecked={characterAllowed}
+              id="numberInput"
+              onChange={(e) => {
+                setCharacterAllowed((prev) => !prev)
+              }} 
+              />
+              <label>Character</label>
+          </div>
         </div>
       </div>
     </>
