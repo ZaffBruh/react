@@ -1,10 +1,19 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 
 function App() {
   const [length, setLength] = useState(8)
   const [numberAllowed, setNumberAllowed] = useState(false)
   const [characterAllowed, setCharacterAllowed] = useState(false)
   const [pass, setPass] = useState("")
+
+  //useRef hook
+  const passwordRef = useRef(null)
+
+  const copyPasswordToClipboard = useCallback(() => {
+    passwordRef.current?.select();
+    passwordRef.current?.setSelectionRange(0,14)
+    window.navigator.clipboard.writeText(pass)
+  }, [pass])
 
   const passwordGenerator = useCallback(() => {
     let password = ""
@@ -18,8 +27,7 @@ function App() {
 
     for (let i = 0; i < length; i++) {
       let char = Math.floor(Math.random()* str.length )
-      password += str.charAt(char)
-      
+      password += str.charAt(char)      
     }
     setPass(password)
       
@@ -40,8 +48,10 @@ function App() {
           className="outline-none w-full py-1 px-3"
           placeholder='Password'
           readOnly
+          ref={passwordRef}
           />
           <button
+          onClick={copyPasswordToClipboard}
           className='outline-none bg-blue-800 text-white px-3 py-0.5 shrink-0'
           >
             copy
