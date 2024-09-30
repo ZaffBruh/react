@@ -5,6 +5,8 @@ function App() {
   const [numberAllowed, setNumberAllowed] = useState(false)
   const [characterAllowed, setCharacterAllowed] = useState(false)
   const [pass, setPass] = useState("")
+  const [copy, setCopy] = useState("Copy")
+  const [copyColor, setCopyColor] = useState("green")
 
   //useRef hook
   const passwordRef = useRef(null)
@@ -12,6 +14,10 @@ function App() {
   const copyPasswordToClipboard = useCallback(() => {
     passwordRef.current?.select();
     passwordRef.current?.setSelectionRange(0,14)
+    // document.querySelector("button").innerHTML = "Copied"
+    // document.querySelector("button").style.backgroundColor="orange"
+    setCopy("Copied")
+    setCopyColor("orange")
     window.navigator.clipboard.writeText(pass)
   }, [pass])
 
@@ -52,9 +58,10 @@ function App() {
           />
           <button
           onClick={copyPasswordToClipboard}
-          className='outline-none bg-blue-800 text-white px-3 py-0.5 shrink-0'
+          style={{backgroundColor:copyColor}}
+          className='outline-none text-white px-3 py-0.5 shrink-0 hover:scale-110'
           >
-            copy
+            {copy}
           </button>
         </div>
         <div
