@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import {InputBox} from "./components"
 import useCurrencyInfo from "./hooks/useCurrencyInfo"
+
 function App() {
   const [amount, setAmount] = useState(0)
   const [from, setFrom] = useState("usd")
@@ -9,12 +10,17 @@ function App() {
 
   const currencyInfo = useCurrencyInfo(from)
   const options = Object.keys(currencyInfo)
+  
   const swap = () => {
-    setFrom(to)
-    setTo(from)
-    setConvertedAmount(amount)
-    setAmount(convertedAmount)
-  }
+    const tempAmount = amount;
+    const tempConvertedAmount = convertedAmount;
+  
+    setFrom(to);
+    setTo(from);
+    setConvertedAmount(tempAmount);
+    setAmount(tempConvertedAmount);
+  };
+  
   const convert = () => {
     setConvertedAmount(amount*currencyInfo[to])
   }
@@ -41,6 +47,7 @@ function App() {
                         currencyOptions={options}
                         onCurrencyChange={(currency) => setAmount(amount)}
                         selectCurrency={from}
+                        onAmountChange={(amount) => setAmount(amount)}
                     />
                 </div>
                 <div className="relative w-full h-0.5">
@@ -53,17 +60,18 @@ function App() {
                     </button>
                 </div>
                 <div className="w-full mt-1 mb-4">
-                    <InputBox
-                        label="To"
-                        amount={convertedAmount}
-                        currencyOptions={options}
-                        onCurrencyChange={(currency) => setTo(currency)}
-                        selectCurrency={from}
-                        amountDisable
-                    />
+                <InputBox
+                  label="To"
+                  amount={convertedAmount}
+                  currencyOptions={options}
+                  onCurrencyChange={(currency) => setTo(currency)}
+                  selectCurrency={to}  // Update this to 'to'
+                  amountDisable
+                />
+
                 </div>
                 <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
-                    Convert 
+                    Convert {from.toUpperCase()} to {to.toUpperCase()}
                 </button>
             </form>
         </div>
