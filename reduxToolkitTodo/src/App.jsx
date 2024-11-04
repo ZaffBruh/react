@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <h1 style="text-align: center">Learn about redux toolkit</h1>
+      <h1 className="text-center">Learn about redux toolkit</h1>
     </>
   )
 }
